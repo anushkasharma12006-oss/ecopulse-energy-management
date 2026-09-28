@@ -1,0 +1,280 @@
+:root {
+  /* EcoPulse Exact Color System */
+  --bg-primary: #071A17;
+  --bg-secondary: #0B2420;
+  --bg-card: #102F29;
+  --bg-card-hover: #153D34;
+  --bg-card-subtle: rgba(16, 47, 41, 0.6);
+  --bg-surface-elevated: #164238;
+
+  /* Domain Accents */
+  --accent-primary: #35D07F;          /* Primary renewable green */
+  --accent-primary-subtle: rgba(53, 208, 127, 0.12);
+  --accent-primary-border: rgba(53, 208, 127, 0.28);
+  --accent-primary-glow: rgba(53, 208, 127, 0.22);
+
+  --accent-solar: #FFC857;            /* Solar Gold */
+  --accent-solar-subtle: rgba(255, 200, 87, 0.12);
+  --accent-solar-border: rgba(255, 200, 87, 0.25);
+
+  --accent-wind: #48C9D8;             /* Wind Cyan */
+  --accent-wind-subtle: rgba(72, 201, 216, 0.12);
+  --accent-wind-border: rgba(72, 201, 216, 0.25);
+
+  --accent-battery: #72E06A;          /* Battery Lime Green */
+  --accent-battery-subtle: rgba(114, 224, 106, 0.12);
+  --accent-battery-border: rgba(114, 224, 106, 0.25);
+
+  --accent-consumption: #8B9CF6;      /* Consumption Lavender */
+  --accent-consumption-subtle: rgba(139, 156, 246, 0.12);
+  --accent-consumption-border: rgba(139, 156, 246, 0.25);
+
+  --accent-warning: #FFB547;          /* Warning Amber */
+  --accent-critical: #FF6B6B;         /* Critical Coral */
+  --accent-critical-subtle: rgba(255, 107, 107, 0.12);
+
+  /* Typography Colors */
+  --text-main: #F1F8F4;
+  --text-secondary: #91ADA3;
+  --text-muted: #628276;
+  --text-dim: #435E54;
+
+  /* Borders & Shadows */
+  --border-hairline: rgba(53, 208, 127, 0.12);
+  --border-card: rgba(53, 208, 127, 0.16);
+  --border-card-hover: rgba(53, 208, 127, 0.35);
+  
+  --shadow-sm: 0 2px 8px rgba(3, 15, 13, 0.4);
+  --shadow-card: 0 8px 24px -4px rgba(3, 15, 13, 0.6), 0 0 0 1px var(--border-hairline);
+  --shadow-hover: 0 14px 32px -4px rgba(3, 15, 13, 0.75), 0 0 0 1px var(--border-card-hover);
+  --shadow-glow: 0 0 25px -5px var(--accent-primary-glow);
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(53, 208, 127, 0.08) 0%, transparent 55%),
+    radial-gradient(circle at 100% 20%, rgba(72, 201, 216, 0.05) 0%, transparent 45%),
+    linear-gradient(rgba(53, 208, 127, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 208, 127, 0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Tabular figures for telemetry data */
+.num-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Reusable Eco Card */
+.eco-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.eco-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.eco-card-interactive:hover {
+  transform: translateY(-2px);
+}
+
+/* Icon Container */
+.icon-bubble {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.eco-card:hover .icon-bubble {
+  transform: scale(1.05);
+}
+
+/* Custom Buttons */
+.btn-eco {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+.btn-eco:active {
+  transform: scale(0.97);
+}
+
+.btn-eco-primary {
+  background: var(--accent-primary);
+  color: #05211B;
+  box-shadow: 0 2px 10px rgba(53, 208, 127, 0.3);
+}
+
+.btn-eco-primary:hover {
+  background: #4ae092;
+  box-shadow: 0 4px 16px rgba(53, 208, 127, 0.45);
+}
+
+.btn-eco-subtle {
+  background: rgba(53, 208, 127, 0.1);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary-border);
+}
+
+.btn-eco-subtle:hover {
+  background: rgba(53, 208, 127, 0.18);
+  border-color: rgba(53, 208, 127, 0.45);
+}
+
+.btn-eco-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  border-color: var(--border-hairline);
+}
+
+.btn-eco-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  border-color: var(--border-card);
+}
+
+.btn-eco-danger {
+  background: rgba(255, 107, 107, 0.08);
+  color: #FF8585;
+  border-color: rgba(255, 107, 107, 0.22);
+}
+
+.btn-eco-danger:hover {
+  background: rgba(255, 107, 107, 0.16);
+  border-color: rgba(255, 107, 107, 0.4);
+}
+
+/* Status Pills */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.pill-green {
+  background: rgba(53, 208, 127, 0.12);
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary-border);
+}
+
+.pill-solar {
+  background: rgba(255, 200, 87, 0.12);
+  color: var(--accent-solar);
+  border: 1px solid var(--accent-solar-border);
+}
+
+.pill-wind {
+  background: rgba(72, 201, 216, 0.12);
+  color: var(--accent-wind);
+  border: 1px solid var(--accent-wind-border);
+}
+
+.pill-battery {
+  background: rgba(114, 224, 106, 0.12);
+  color: var(--accent-battery);
+  border: 1px solid var(--accent-battery-border);
+}
+
+.pill-consumption {
+  background: rgba(139, 156, 246, 0.12);
+  color: var(--accent-consumption);
+  border: 1px solid var(--accent-consumption-border);
+}
+
+.pill-critical {
+  background: rgba(255, 107, 107, 0.12);
+  color: var(--accent-critical);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+/* Subtle Animated Flow Line */
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.flow-animated {
+  stroke-dasharray: 6 6;
+  animation: flowDash 1.2s linear infinite;
+}
+
+/* Subtle Pulse */
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.pulse-live {
+  animation: pulseSubtle 2.5s ease-in-out infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #143730;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1e5248;
+}
